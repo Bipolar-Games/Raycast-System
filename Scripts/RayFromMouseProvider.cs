@@ -6,16 +6,32 @@ namespace Bipolar.RaycastSystem
     {
         [SerializeField]
         private new Camera camera;
+        private Camera Camera 
+        {
+            get 
+            {
+                if (camera == null)
+                    FindCamera();
+                return camera; 
+            }
+        }
 
         private void Reset()
         {
+            FindCamera();
+        }
+
+        private void FindCamera()
+        {
             camera = GetComponent<Camera>();
+            if (camera != null)
+                camera = Camera.main;
         }
 
         public override Ray GetRay()
         {
             Vector2 screenMousePosition = GetScreenPosition();
-            return camera.ScreenPointToRay(screenMousePosition);
+            return Camera.ScreenPointToRay(screenMousePosition);
         }
 
         protected abstract Vector2 GetScreenPosition();

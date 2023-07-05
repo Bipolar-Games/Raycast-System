@@ -8,7 +8,8 @@ namespace Bipolar.RaycastSystem
         public abstract Ray GetRay();
     }
 
-    public class Raycaster : MonoBehaviour
+
+    public class RaycastController : MonoBehaviour
     {
         public event Action<RaycastTarget> OnRayEnter;
         public event Action<RaycastTarget> OnRayExit;
@@ -117,12 +118,10 @@ namespace Bipolar.RaycastSystem
             }
         }
 
-
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.magenta;
             Gizmos.DrawRay(ray.origin, ray.direction * raycastDistance);
         }
-
     }
 }
