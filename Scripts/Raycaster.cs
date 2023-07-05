@@ -8,24 +8,22 @@ namespace Bipolar.RaycastSystem
         public abstract Ray GetRay();
     }
 
-    public class RaycastController : MonoBehaviour
+    public class Raycaster : MonoBehaviour
     {
-        public enum RaycastType
-        {
-            Forward,
-            Cursor,
-        }
-
-
         public event Action<RaycastTarget> OnRayEnter;
         public event Action<RaycastTarget> OnRayExit;
 
         [Header("Settings")]
         [SerializeField]
-        private RayFromMouseProvider cursorRayProvider;
-
-        [SerializeField]
-        private TransformForwardRayProvider forwardRayProvider;
+        private RayProvider rayProvider;
+        public RayProvider RayProvider
+        {
+            get => rayProvider;
+            set
+            {
+                rayProvider = value;
+            }
+        }
 
         [SerializeField]
         private LayerMask raycastedLayers;
@@ -43,15 +41,7 @@ namespace Bipolar.RaycastSystem
             set => raycastDistance = value;
         }
         
-        [Header("States")]
-        [SerializeField]
-        private RaycastType raycastMode;
-        public RaycastType RaycastMode
-        {
-            get => raycastMode;
-            set => raycastMode = value;
-        }
-        
+        [Header("States")]     
         [SerializeField]
         private RaycastTarget currentTarget;
         public RaycastTarget Target => currentTarget;
@@ -65,18 +55,15 @@ namespace Bipolar.RaycastSystem
 
         private void DoRaycast()
         {
-            RayProvider provider = (raycastMode == RaycastType.Cursor) ? cursorRayProvider : forwardRayProvider as RayProvider;
+            RayProvider provider = rayProvider;
             ray = provider.GetRay();
             if (TryGetRaycastTarget(ray, out var target))
             {
                 if (target != currentTarget)
                 {
-                    if (currentTarget != null)
-                        CallExitEvents(currentTarget);
-
+                    CallExitEvents(currentTarget);
                     currentTarget = target;
-                    if (target != null)
-                        CallEnterEvents(target);
+                    CallEnterEvents(currentTarget);
                 }
                 else
                 {
@@ -106,11 +93,6 @@ namespace Bipolar.RaycastSystem
             return TryGetRaycastTarget(raycastCollider, out target);
         }
 
-        private void ProcessHit(RaycastHit hit)
-        {
-
-        }
-
         static bool TryGetRaycastTarget(RaycastCollider collider, out RaycastTarget target)
         {
             target = collider.RaycastTarget;
@@ -119,14 +101,20 @@ namespace Bipolar.RaycastSystem
 
         private void CallEnterEvents(RaycastTarget target)
         {
-            OnRayEnter?.Invoke(target);
-            target.RayEnter();
+            if (target != null)
+            {
+                OnRayEnter?.Invoke(target);
+                target.RayEnter();
+            }
         }
 
         private void CallExitEvents(RaycastTarget target)
         {
-            OnRayExit?.Invoke(target);
-            target.RayExit();
+            if (target != null)
+            {
+                OnRayExit?.Invoke(target);
+                target.RayExit();
+            }
         }
 
 
