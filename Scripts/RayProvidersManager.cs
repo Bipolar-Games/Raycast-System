@@ -22,14 +22,12 @@ namespace Bipolar.RaycastSystem
 
         public void SetRayProvider(RayProvider rayProvider)
         {
-            if (raycastController != null)
-                SetRayProvider(raycastController, rayProvider);
+            SetRayProvider(raycastController, rayProvider);
         }    
 
         public static void SetRayProvider<T>(RaycastController controller) where T : RayProvider
         {
-            T rayProvider = controller.GetComponent<T>();
-            if (rayProvider == null)
+            if (controller.TryGetComponent<T>(out var rayProvider) == false)
                 rayProvider = controller.gameObject.AddComponent<T>();
 
             SetRayProvider(controller, rayProvider);
@@ -37,8 +35,7 @@ namespace Bipolar.RaycastSystem
 
         public void SetRayProvider<T>() where T : RayProvider
         {
-            if (raycastController != null)
-                SetRayProvider<T>(raycastController);
+            SetRayProvider<T>(raycastController);
         }
     }
 }
