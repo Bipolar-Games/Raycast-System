@@ -8,11 +8,10 @@ namespace Bipolar.RaycastSystem
         public abstract Ray GetRay();
     }
 
-
     public class RaycastController : MonoBehaviour
     {
-        public event Action<RaycastTarget> OnRayEnter;
-        public event Action<RaycastTarget> OnRayExit;
+        public event Action<RaycastTarget> OnRayEntered;
+        public event Action<RaycastTarget> OnRayExited;
 
         [Header("Settings")]
         [SerializeField]
@@ -73,12 +72,17 @@ namespace Bipolar.RaycastSystem
             }
             else
             {
-                if (currentTarget != null)
-                {
-                    var exitedTarget = currentTarget;
-                    currentTarget = null;
-                    CallExitEvents(exitedTarget);
-                }
+                ExitCurrentTarget();
+            }
+        }
+
+        private void ExitCurrentTarget()
+        {
+            if (currentTarget != null)
+            {
+                var exitedTarget = currentTarget;
+                currentTarget = null;
+                CallExitEvents(exitedTarget);
             }
         }
 
@@ -104,7 +108,7 @@ namespace Bipolar.RaycastSystem
         {
             if (target != null)
             {
-                OnRayEnter?.Invoke(target);
+                OnRayEntered?.Invoke(target);
                 target.RayEnter();
             }
         }
@@ -113,10 +117,16 @@ namespace Bipolar.RaycastSystem
         {
             if (target != null)
             {
-                OnRayExit?.Invoke(target);
+                OnRayExited?.Invoke(target);
                 target.RayExit();
             }
         }
+
+        private void OnDisable()
+        {
+            ExitCurrentTarget();
+        }
+
 
         private void OnDrawGizmosSelected()
         {

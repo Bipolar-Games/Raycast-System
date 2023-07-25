@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Runtime.CompilerServices;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Bipolar.RaycastSystem
 {
@@ -24,7 +26,7 @@ namespace Bipolar.RaycastSystem
         {
             if (raycastController != null)
                 SetRayProvider(raycastController, rayProvider);
-        }    
+        }
 
         public static void SetRayProvider<T>(RaycastController controller) where T : RayProvider
         {
