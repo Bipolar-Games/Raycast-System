@@ -127,10 +127,9 @@ namespace Bipolar.RaycastSystem
             ExitCurrentTarget();
         }
 
-
         private void OnDrawGizmosSelected()
         {
-            Gizmos.color = Color.magenta;
+            Gizmos.color = Color.white;
             Gizmos.DrawRay(ray.origin, ray.direction * raycastDistance);
         }
     }
