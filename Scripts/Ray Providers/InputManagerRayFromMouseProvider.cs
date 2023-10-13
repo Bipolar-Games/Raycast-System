@@ -7,7 +7,7 @@ namespace Bipolar.RaycastSystem
     {
         protected override Vector2 GetScreenPosition()
         {
-            return Input.mousePosition;
+            return UnityEngine.Input.mousePosition;
         }
     }
 #endif

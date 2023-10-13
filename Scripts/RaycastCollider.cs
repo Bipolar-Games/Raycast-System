@@ -25,6 +25,7 @@ namespace Bipolar.RaycastSystem
         [SerializeField, ReadOnly]
         private int initialLayer;
 
+
         private void Reset()
         {
             raycastTargets = GetComponentsInParent<RaycastTarget>();
