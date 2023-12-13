@@ -44,7 +44,7 @@ namespace Bipolar.RaycastSystem
         [Header("States")]     
         [SerializeField]
         private RaycastTarget currentTarget;
-        public RaycastTarget Target => currentTarget;
+        public RaycastTarget Target => enabled ? currentTarget : null;
 
         private Ray ray;
 
@@ -55,9 +55,7 @@ namespace Bipolar.RaycastSystem
 
         private void DoRaycast()
         {
-            RayProvider provider = rayProvider;
-            ray = provider.GetRay();
-            if (TryGetRaycastTarget(ray, out var target))
+            if (TryGetRaycastTarget(out var target))
             {
                 if (target != currentTarget)
                 {
@@ -86,6 +84,13 @@ namespace Bipolar.RaycastSystem
             }
         }
 
+        public bool TryGetRaycastTarget(out RaycastTarget target)
+        {
+            RayProvider provider = rayProvider;
+            ray = provider.GetRay();
+            return TryGetRaycastTarget(ray, out target);
+        }
+
         private bool TryGetRaycastTarget(Ray ray, out RaycastTarget target)
         {
             target = null;
@@ -98,7 +103,7 @@ namespace Bipolar.RaycastSystem
             return TryGetRaycastTarget(raycastCollider, out target);
         }
 
-        static bool TryGetRaycastTarget(RaycastCollider collider, out RaycastTarget target)
+        private static bool TryGetRaycastTarget(RaycastCollider collider, out RaycastTarget target)
         {
             target = collider.RaycastTarget;
             return target != null;
