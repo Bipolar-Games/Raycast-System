@@ -23,8 +23,7 @@ namespace Bipolar.RaycastSystem
 
         private void FindCamera()
         {
-            camera = GetComponent<Camera>();
-            if (camera != null)
+            if (TryGetComponent(out camera) == false)
                 camera = Camera.main;
         }
 
