@@ -14,8 +14,8 @@ namespace Bipolar.RaycastSystem
         {
             get
             {
-                foreach(var target in raycastTargets)
-                    if (target.enabled)
+                foreach (var target in raycastTargets)
+                    if (target.isActiveAndEnabled)
                         return target;
 
                 return default;
@@ -24,6 +24,7 @@ namespace Bipolar.RaycastSystem
 
         [SerializeField, ReadOnly]
         private int initialLayer;
+
 
         private void Reset()
         {
