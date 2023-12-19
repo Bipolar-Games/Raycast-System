@@ -10,8 +10,10 @@ namespace Bipolar.RaycastSystem
 
     public class RaycastController : MonoBehaviour
     {
-        public event Action<RaycastTarget> OnRayEntered;
-        public event Action<RaycastTarget> OnRayExited;
+        public delegate void RaycastTargetChangeEventHandler(RaycastTarget target);
+
+        public event RaycastTargetChangeEventHandler OnRayEntered;
+        public event RaycastTargetChangeEventHandler OnRayExited;
 
         [Header("Settings")]
         [SerializeField]
