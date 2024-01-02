@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Bipolar.RaycastSystem
 {
-    [RequireComponent(typeof(Collider))]
+    [RequireComponent(typeof(Collider)), DisallowMultipleComponent]
     public class RaycastCollider : MonoBehaviour
     {
         public const int ignoreRaycastLayer = 2;
