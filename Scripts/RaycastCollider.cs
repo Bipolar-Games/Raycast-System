@@ -1,5 +1,4 @@
-﻿using NaughtyAttributes;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Bipolar.RaycastSystem
 {
@@ -22,7 +21,10 @@ namespace Bipolar.RaycastSystem
             }
         }
 
-        [SerializeField, ReadOnly]
+        [SerializeField]
+#if NAUGHTY_ATTRIBUTES
+        [NaughtyAttributes.ReadOnly]
+#endif
         private int initialLayer;
 
         private void Reset()
