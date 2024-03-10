@@ -35,13 +35,21 @@ namespace Bipolar.RaycastSystem
         }
         
         [SerializeField]
-        private float raycastDistance;
+        private float raycastDistance = 3;
         public float RaycastDistance
         {
             get => raycastDistance;
             set => raycastDistance = value;
         }
-        
+
+        [SerializeField]
+        private QueryTriggerInteraction triggerDetection = QueryTriggerInteraction.UseGlobal;
+        public QueryTriggerInteraction TriggerDetection
+        {
+            get => triggerDetection;
+            set => triggerDetection = value;
+        }
+
         [Header("States")]     
         [SerializeField]
         private RaycastTarget currentTarget;
@@ -95,7 +103,7 @@ namespace Bipolar.RaycastSystem
         private bool TryGetRaycastTarget(Ray ray, out RaycastTarget target)
         {
             target = null;
-            if (Physics.Raycast(ray, out var hit, raycastDistance, raycastedLayers) == false)
+            if (Physics.Raycast(ray, out var hit, raycastDistance, raycastedLayers, triggerDetection) == false)
                 return false;
 
             if (hit.collider.TryGetComponent<RaycastCollider>(out var raycastCollider) == false)
