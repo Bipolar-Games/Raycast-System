@@ -5,8 +5,6 @@ namespace Bipolar.RaycastSystem
     [RequireComponent(typeof(Collider)), DisallowMultipleComponent]
     public class RaycastCollider : MonoBehaviour
     {
-        public const int ignoreRaycastLayer = 2;
-
         [SerializeField]
         private RaycastTarget[] raycastTargets;
         public RaycastTarget RaycastTarget
@@ -21,20 +19,9 @@ namespace Bipolar.RaycastSystem
             }
         }
 
-        [SerializeField]
-#if NAUGHTY_ATTRIBUTES
-        [NaughtyAttributes.ReadOnly]
-#endif
-        private int initialLayer;
-
         private void Reset()
         {
             raycastTargets = GetComponentsInParent<RaycastTarget>();
-        }
-
-        private void Awake()
-        {
-            initialLayer = gameObject.layer;
         }
     }
 }
