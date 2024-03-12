@@ -52,6 +52,9 @@ namespace Bipolar.RaycastSystem
 
         [Header("States")]     
         [SerializeField]
+#if NAUGHTY_ATTRIBUTES
+        [NaughtyAttributes.ReadOnly]
+#endif
         private RaycastTarget currentTarget;
         public RaycastTarget Target => enabled ? currentTarget : null;
 
@@ -64,22 +67,15 @@ namespace Bipolar.RaycastSystem
 
         private void DoRaycast()
         {
-            if (TryGetRaycastTarget(out var target))
-            {
-                if (target != currentTarget)
-                {
-                    CallExitEvents(currentTarget);
-                    currentTarget = target;
-                    CallEnterEvents(currentTarget);
-                }
-                else
-                {
-                    currentTarget.RayStay();
-                }
-            }
-            else
+            if (TryGetRaycastTarget(out var target) == false)
             {
                 ExitCurrentTarget();
+            }
+            else if (target != currentTarget)
+            {
+                CallExitEvents(currentTarget);
+                currentTarget = target;
+                CallEnterEvents(currentTarget);
             }
         }
 

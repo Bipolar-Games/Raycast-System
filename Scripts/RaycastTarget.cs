@@ -7,7 +7,6 @@ namespace Bipolar.RaycastSystem
     public class RaycastTarget : MonoBehaviour
     {
         public event Action OnRayEnter;
-        public event Action OnRayStay;
         public event Action OnRayExit;
 
         [SerializeField]
@@ -21,11 +20,6 @@ namespace Bipolar.RaycastSystem
         { 
             onRayEnter.Invoke();
             OnRayEnter?.Invoke();
-        }
-
-        public void RayStay()
-        {
-            OnRayStay?.Invoke();
         }
 
         public void RayExit()
