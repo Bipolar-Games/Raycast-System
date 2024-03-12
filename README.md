@@ -7,7 +7,7 @@ In Raycast System there are two types of objects differing in behavior and purpo
 2) **Raycaster** the subject of the system. It detects the raycasted objects in order to call some logic on them
 
 ## Configuration
-Configuration of the game to support and use Raycast System consists of 2 parts: (1) raycasted objects configuration and raycaster (player) configuration.
+Configuration of the game to support and use Raycast System consists of 2 parts: (1) raycasted objects configuration and (2) raycaster configuration.
 
 ### Objects configuration
 1. **Layer** - preparing a special layer for detected objects is not mandatory and raycasted objects might be on _Default_ layer as well. However it is a good practice to create a separate layer for purposes of being detected as raycasted or interactive objects.
