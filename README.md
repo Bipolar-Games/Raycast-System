@@ -10,6 +10,7 @@ Configuration of the game to support and use Raycast System consists of 2 parts:
 ### Objects configuration
 1. **Layer** - preparing a special layer for detected objects is not mandatory and raycasted objects might be on _Default_ layer as well. However it is a good practice to create a separate layer for purposes of being detected as raycasted or interactive objects.
 2. **Raycast Collider** - every raycasted object needs a collider to be detected. After setting a desired layer (chosen in point 1) on colliders game object, component [RaycastCollider](https://github.com/Kosmik123/Raycast-System/blob/master/Scripts/RaycastCollider.cs) must be added. Raycast Collider represents one collider of the object, as the object might use multiple colliders.
-3. **Raycast Target** - another component which must be added to raycasted object.
+3. **Raycast Target** - another component which must be added to raycasted object. The [RaycastTarget](https://github.com/Kosmik123/Raycast-System/blob/master/Scripts/RaycastTarget.cs) component represents the raycasted object and it's logic. It should be added to game object where all other logic related scripts are to fully benefit from TryGetComponent method. Preferably it should be added to ancestor of Raycast Colliders. Raycast Target can be inherited from, for example to contain cached logic component, to make referencing it easier instead of using TryGetComponent
 
 
+ 
