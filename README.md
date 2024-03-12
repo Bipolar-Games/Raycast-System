@@ -21,3 +21,8 @@ Configuration of the game to support and use Raycast System consists of 2 parts:
     *  **TransformForwardRayProvider** - returns forward looking ray from game object its attached to
     *  **RayFromMouseProvider** - returns ray going from camera (by default MainCamera) in the direction specified by mouse pointer position. There are both Input Manager and Input System variants
 3. **Other fields** - lastly other raycast controller fields should be configured. This applies specially _Raycasted Layers_ which represents layers detected by the raycast controller. The field must contain both: (1) layers of raycasted objects specified earlier and (2) layers that block the view/access to raycasted objects
+
+
+
+## Other packages
+This package can use [Naughty Attributes](https://github.com/dbrizov/NaughtyAttributes) package to view read only fields that shouldn't be edited in inspector. To setup it correctly you need to install the package and define NAUGHTY_ATTRIBUTES symbol.
