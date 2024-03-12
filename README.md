@@ -2,9 +2,9 @@
 
 **Raycast System** is a set of a few classes which help setup basic structure for detecting special interest objects in 3D world, mainly for purposes of some kind of interaction system. 
 
-In Raycast System there are two types of objects differing in behavior and purpose.
+In Raycast System there are two types of objects differing in behavior and purpose:
 1) **Raycasted objects** are objects which are detected in Raycast System. They might contain logic to necessary for the interaction, but they shouldn't call it on their own. Their main purpose is to be detected by raycaster and then used by its controller logic
-2) **Raycaster** the subject of the system
+2) **Raycaster** the subject of the system. It detects the raycasted objects in order to call some logic on them
 
 ## Configuration
 Configuration of the game to support and use Raycast System consists of 2 parts: (1) raycasted objects configuration and raycaster (player) configuration.
