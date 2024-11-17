@@ -2,11 +2,10 @@
 
 namespace Bipolar.RaycastSystem
 {
-    public class TransformForwardRayProvider : RayProvider
+	[AddComponentMenu(AddComponentPath.RayProviders + "Transform Forward Provider")]
+	public class TransformForwardRayProvider : RayProvider
     {
-        public override Ray GetRay()
-        {
-            return new Ray(transform.position, transform.forward);
-        }
-    }
+		public override Ray GetRay() => 
+			new Ray(transform.position, transform.forward);
+	}
 }

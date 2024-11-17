@@ -2,7 +2,8 @@
 
 namespace Bipolar.RaycastSystem
 {
-    public class MainCameraForwardRayProvider : RayProvider
+	[AddComponentMenu(AddComponentPath.RayProviders + "Main Camera Forward Provider")]
+	public class MainCameraForwardRayProvider : RayProvider
     {
         private Transform mainCameraTransform;
         private Transform MainCameraTransform
@@ -15,9 +16,7 @@ namespace Bipolar.RaycastSystem
             }
         }
 
-        public override Ray GetRay()
-        {
-            return new Ray(MainCameraTransform.position, MainCameraTransform.forward);
-        }
-    }
+		public override Ray GetRay() => 
+            new Ray(MainCameraTransform.position, MainCameraTransform.forward);
+	}
 }
