@@ -1,5 +1,4 @@
-﻿#if ENABLE_INPUT_SYSTEM
-namespace Bipolar.RaycastSystem
+﻿namespace Bipolar.RaycastSystem
 {
 	public static class AddComponentPath
     {
@@ -7,4 +6,3 @@ namespace Bipolar.RaycastSystem
         public const string RayProviders = Root + "Ray Provider/";
     }
 }
-#endif
